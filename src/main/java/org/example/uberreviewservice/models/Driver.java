@@ -16,8 +16,8 @@ import java.util.List;
 @AllArgsConstructor
 public class Driver extends BaseModel {
     private String name;
-    @Column(unique = true,nullable = false)
-    private String lisenceNumber;
+    @Column(unique = true,nullable = false,name = "licence_number")
+    private String licenceNumber;
     //1 to many association
     @OneToMany(mappedBy = "driver")
     private List<Booking> bookings=new ArrayList<>();

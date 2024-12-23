@@ -1,12 +1,16 @@
 package org.example.uberreviewservice.Services;
 
 import org.example.uberreviewservice.Repositories.BookingRepository;
+import org.example.uberreviewservice.Repositories.DriverRepository;
 import org.example.uberreviewservice.Repositories.ReviewRepository;
+import org.example.uberreviewservice.models.BaseModel;
 import org.example.uberreviewservice.models.Booking;
+import org.example.uberreviewservice.models.Driver;
 import org.example.uberreviewservice.models.Review;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -16,10 +20,12 @@ import java.util.Optional;
 public class ReviewService implements CommandLineRunner {
     private final ReviewRepository reviewRepository;
     private final BookingRepository bookingRepository;
+    private final DriverRepository driverRepository;
 
-    public ReviewService(ReviewRepository reviewRepository, BookingRepository bookingRepository) {
+    public ReviewService(ReviewRepository reviewRepository, BookingRepository bookingRepository, DriverRepository driverRepository) {
         this.reviewRepository = reviewRepository;
         this.bookingRepository = bookingRepository;
+        this.driverRepository = driverRepository;
     }
 
     @Override
@@ -36,9 +42,17 @@ public class ReviewService implements CommandLineRunner {
 //        for (Review review : reviews) {
 //            System.out.println(review.getContent());
 //        }
-        Optional<Booking> b=bookingRepository.findById(6L);
-        if(b.isPresent()){
-            bookingRepository.deleteById(b.get().getId()) ;
+//        Optional<Booking> b=bookingRepository.findById(6L);
+//        if(b.isPresent()){
+//            bookingRepository.deleteById(b.get().getId()) ;
+//        }
+        Optional<Driver> driver = driverRepository.findById(1L);
+        if(driver.isPresent()) {
+            System.out.println(driver.get().getName());
+                List<Booking> b=driver.get().getBookings();
+                for(Booking bk:b) {
+                    System.out.println(bk.getId());
+                }
         }
     }
 }
