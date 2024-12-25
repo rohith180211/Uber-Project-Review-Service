@@ -25,5 +25,4 @@ public class Review extends BaseModel{
     public String toString() {
         return "Review :" + this.content  + " " + this.rating + " " + this.createdAt;
     }
-
 }
