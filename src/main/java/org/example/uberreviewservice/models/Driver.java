@@ -1,24 +1,30 @@
 package org.example.uberreviewservice.models;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class Driver extends BaseModel {
+public class Driver extends BaseModel{
+
     private String name;
-    @Column(unique = true,nullable = false,name = "licence_number")
-    private String licenceNumber;
-    //1 to many association
+
+    @Column(nullable = false, unique = true)
+    private String licenseNumber;
+
+    private String phoneNumber;
+
+    // 1 : n , Driver : Booking
     @OneToMany(mappedBy = "driver")
-    private List<Booking> bookings=new ArrayList<>();
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Booking> bookings;
 }

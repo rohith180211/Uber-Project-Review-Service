@@ -10,10 +10,7 @@ import org.example.uberreviewservice.models.Review;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 
@@ -46,13 +43,20 @@ public class ReviewService implements CommandLineRunner {
 //        if(b.isPresent()){
 //            bookingRepository.deleteById(b.get().getId()) ;
 //        }
-        Optional<Driver> driver = driverRepository.findById(1L);
-        if(driver.isPresent()) {
-            System.out.println(driver.get().getName());
-                List<Booking> b=driver.get().getBookings();
-                for(Booking bk:b) {
-                    System.out.println(bk.getId());
-                }
-        }
+//        Optional<Driver> driver = driverRepository.findById(1L);
+//        if(driver.isPresent()) {
+//            System.out.println(driver.get().getName());
+//                List<Booking> b=driver.get().getBookings();
+//                for(Booking bk:b) {
+//                    System.out.println(bk.getId());
+//                }
+//        }
+        List<Long> driverIds=new ArrayList<>(Arrays.asList(1L,2L));
+        List<Driver> drivers=driverRepository.findAllByIdIn(driverIds);
+        //List<Booking> bookings=bookingRepository.findAllByDriverIn(drivers);
+//        for(Driver driver:drivers){
+//            Set<Booking> bookings=driver.getBookings();
+//            bookings.forEach(booking->System.out.println(booking.getId()));
+//        }
     }
 }

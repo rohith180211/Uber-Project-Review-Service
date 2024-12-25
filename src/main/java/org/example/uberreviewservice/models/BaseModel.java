@@ -8,24 +8,23 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
+
 @EntityListeners(AuditingEntityListener.class)
-@MappedSuperclass //Parent class annotation
+@MappedSuperclass
 @Getter
 @Setter
 public abstract class BaseModel {
-    @Id //This annotation makes this variable primary key of our table
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id // this annotation makes the id property a primary key of our table
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Identity means auto_increment
     protected Long id;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate //handle it for object creation
+    @Temporal(TemporalType.TIMESTAMP) // this annotation tells spring about the formats of Date object to be stored i.e. Date / Time ? Timestamp
+    @CreatedDate // this annotation tells spring that only handle it for object creation
     protected Date createdAt;
-
 
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate//for object updates
+    @LastModifiedDate  // this annotation tells spring that only handle it for object update
     protected Date updatedAt;
-
 }
