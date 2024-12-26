@@ -7,9 +7,13 @@ import java.util.Optional;
 
 public interface ReviewService {
 
-    public Optional<Review> findReviewById(Long id);
+    public Optional<Review> getReviewById(Long id);
 
-    public List<Review> findAllReviews();
+    public List<Review> getAllReviews();
 
-    public Boolean deleteReviewById(Long id);
+    public boolean deleteReviewById(Long id);
+
+    public Review publishReview(Review request);
+
+    public Review updateReview(Long reviewId,Review request);
 }
